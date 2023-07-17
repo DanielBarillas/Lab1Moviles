@@ -53,6 +53,8 @@ public class ItemDataJ {
             return "entero";
         } else if (originalValue instanceof Double) {
             return "null";
+        } else if (originalValue instanceof Boolean) {
+            return "Booleano";
         } else {
             return null;
         }
