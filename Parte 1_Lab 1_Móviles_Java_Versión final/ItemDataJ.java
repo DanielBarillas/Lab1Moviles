@@ -28,8 +28,12 @@ public class ItemDataJ {
         Object originalValue;
         try {
             originalValue = Integer.parseInt(inputValue);
-        } catch (NumberFormatException e) {
-            originalValue = inputValue;
+        } catch (NumberFormatException e1) {
+            try {
+                originalValue = Double.parseDouble(inputValue);
+            } catch (NumberFormatException e2) {
+                originalValue = inputValue;
+            }
         }
         ItemDataJ data = new ItemDataJ(originalValue);
         data.showInfo();
@@ -37,11 +41,18 @@ public class ItemDataJ {
 
     public String getType() {
         if (originalValue instanceof String) {
-            return "cadena";
+            String cadena = (String) originalValue;
+            if (cadena.equals("true")) {
+                return "Verdadero";
+            } else if (cadena.equals("false")) {
+                return "Falso";
+            } else {
+                return "cadena";
+            }
         } else if (originalValue instanceof Integer) {
             return "entero";
-        } else if (originalValue instanceof Boolean) {
-            return "booleano";
+        } else if (originalValue instanceof Double) {
+            return "null";
         } else {
             return null;
         }
@@ -62,9 +73,9 @@ public class ItemDataJ {
             } else {
                 return null;
             }
-        } else if (originalValue instanceof Boolean) {
-            boolean valor = (Boolean) originalValue;
-            return valor ? "Verdadero" : "Falso";
+        } else if (originalValue instanceof Double) {
+            double valor = (Double) originalValue;
+            return "Null: " + valor;
         } else {
             return null;
         }
